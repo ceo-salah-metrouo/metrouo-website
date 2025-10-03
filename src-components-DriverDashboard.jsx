@@ -20,7 +20,7 @@ export default function DriverDashboard({ user, onLogout }) {
   return (
     <div className="app">
       <header>
-        <h1>LadiesBid — Driver</h1>
+        <h1>Metrouo — Driver</h1>
         <div>
           <span>{user.name} ({user.email})</span>
           <button className="btn small" onClick={onLogout}>Logout</button>
@@ -33,12 +33,7 @@ export default function DriverDashboard({ user, onLogout }) {
           <h3>Open Rides</h3>
           <div className="list">
             {rides.filter(r => r.status === 'open').map(r => (
-              <RideCard 
-                key={r.id} 
-                ride={r} 
-                onBid={placeBid} 
-                isClient={false} 
-              />
+              <RideCard key={r.id} ride={r} onBid={placeBid} isClient={false} />
             ))}
           </div>
         </section>
