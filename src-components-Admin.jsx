@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { resetAll, getUsers, getRides } from '../lib/storage'
+import { resetAll, getUsers, getRides } from './src-lib-storage.js'
 
 export default function Admin({ onLogout }) {
   const [users, setUsers] = useState(getUsers())
