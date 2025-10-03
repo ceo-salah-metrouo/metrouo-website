@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { registerUser, loginUser } from '../lib/storage'
+import { registerUser, loginUser } from './src-lib-storage.js'
 
 export default function Auth({ onLogin }) {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -30,12 +30,33 @@ export default function Auth({ onLogin }) {
       <form onSubmit={handleSubmit}>
         <h2>{isRegistering ? 'Register' : 'Login'}</h2>
         {isRegistering && (
-          <input name="name" placeholder="Name" required onChange={e => setForm({...form, name: e.target.value})} />
+          <input 
+            name="name" 
+            placeholder="Name" 
+            required 
+            onChange={e => setForm({...form, name: e.target.value})} 
+          />
         )}
-        <input name="email" type="email" placeholder="Email" required onChange={e => setForm({...form, email: e.target.value})} />
-        <input name="password" type="password" placeholder="Password" required onChange={e => setForm({...form, password: e.target.value})} />
+        <input 
+          name="email" 
+          type="email" 
+          placeholder="Email" 
+          required 
+          onChange={e => setForm({...form, email: e.target.value})} 
+        />
+        <input 
+          name="password" 
+          type="password" 
+          placeholder="Password" 
+          required 
+          onChange={e => setForm({...form, password: e.target.value})} 
+        />
         {isRegistering && (
-          <select name="role" onChange={e => setForm({...form, role: e.target.value})} value={form.role}>
+          <select 
+            name="role" 
+            onChange={e => setForm({...form, role: e.target.value})} 
+            value={form.role}
+          >
             <option value="client">Client</option>
             <option value="driver">Driver</option>
           </select>
@@ -44,7 +65,10 @@ export default function Auth({ onLogin }) {
         {error && <div className="error">{error}</div>}
 
         <button type="submit">{isRegistering ? 'Register' : 'Login'}</button>
-        <button type="button" onClick={() => setIsRegistering(!isRegistering)}>
+        <button 
+          type="button" 
+          onClick={() => setIsRegistering(!isRegistering)}
+        >
           {isRegistering ? 'Go to Login' : 'Go to Register'}
         </button>
       </form>
