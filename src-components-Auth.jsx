@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { registerUser, loginUser } from '../lib/storage'
 
 export default function Auth({ onLogin }) {
-  // Placeholder code structure - assumes you use state for form inputs
-
   const [isRegistering, setIsRegistering] = useState(false)
   const [error, setError] = useState('')
   const [form, setForm] = useState({ 
