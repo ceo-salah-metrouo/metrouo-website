@@ -7,9 +7,10 @@ export function MapPreview({ locations = [] }) {
   return (
     <div className="map-box">
       <MapContainer center={defaultCenter} zoom={13} style={{ height: 250, width: '100%' }}>
+        {/* ACTION: Switched to standard OpenStreetMap tiles (NO TOKEN REQUIRED) */}
         <TileLayer
-          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`}
-          attribution='© <a href="https://www.mapbox.com/">Mapbox</a> © <a href="https://www.openstreetmap.org/">OSM</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {/* We only plot generic markers — for simplicity */}
         {locations.map((loc, i) => (
