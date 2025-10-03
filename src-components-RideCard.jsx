@@ -18,8 +18,8 @@ export default function RideCard({ ride, onAccept, onBid, isClient }) {
             onChange={e => setBidAmount(e.target.value)}
             placeholder="Your bid (EGP)"
           />
-          <button 
-            className="btn small" 
+          <button
+            className="btn small"
             onClick={() => {
               onBid(ride.id, parseInt(bidAmount))
               setBidAmount('')
@@ -36,8 +36,8 @@ export default function RideCard({ ride, onAccept, onBid, isClient }) {
             <li key={b.id}>
               {b.amount} EGP{' '}
               {isClient && ride.status === 'open' && (
-                <button 
-                  className="btn small" 
+                <button
+                  className="btn small"
                   onClick={() => onAccept(ride.id, b.id)}
                 >
                   Accept
