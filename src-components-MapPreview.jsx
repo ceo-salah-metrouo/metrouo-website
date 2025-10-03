@@ -7,7 +7,7 @@ export function MapPreview({ locations = [] }) {
   return (
     <div className="map-box">
       <MapContainer center={defaultCenter} zoom={13} style={{ height: 250, width: '100%' }}>
-        {/* ACTION: Switched to standard OpenStreetMap tiles (NO TOKEN REQUIRED) */}
+        {/* FINAL EDIT: Switched to standard OpenStreetMap tiles (NO TOKEN REQUIRED) */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
