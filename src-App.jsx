@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import Auth from './components/Auth.jsx'
-import ClientDashboard from './components/ClientDashboard.jsx'
-import DriverDashboard from './components/DriverDashboard.jsx'
-import Admin from './components/Admin.jsx'
-import { getCurrentUser, logoutUser, loadDemoData } from './lib/storage.js'
+import Auth from './src-components-Auth.jsx'
+import ClientDashboard from './src-components-ClientDashboard.jsx'
+import DriverDashboard from './src-components-DriverDashboard.jsx'
+import Admin from './src-components-Admin.jsx'
+import { getCurrentUser, logoutUser, loadDemoData } from './src-lib-storage.js'
 
 export default function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    // Load demo admin user if none exists
     loadDemoData()
-    // Restore logged in user
     setUser(getCurrentUser())
   }, [])
 
