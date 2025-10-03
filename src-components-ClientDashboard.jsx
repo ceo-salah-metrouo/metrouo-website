@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { getRides, createRide, acceptBid } from '../lib/storage'
-import RideCard from './RideCard'
-import { MapPreview } from './MapPreview'
-import { distanceKm } from '../lib/distanceKm'
+import { getRides, createRide, acceptBid } from './src-lib-storage.js'
+import RideCard from './src-components-RideCard.jsx'
+import { MapPreview } from './src-components-MapPreview.jsx'
+import { distanceKm } from './src-lib-distanceKm.js'
 
 export default function ClientDashboard({ user, onLogout }) {
   const [rides, setRides] = useState(getRides())
   const [form, setForm] = useState({ from: '', to: '', notes: '' })
   const [msg, setMsg] = useState('')
 
-  function handleChange(e){ setForm({...form, [e.target.name]: e.target.value}) }
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
-  // FINAL EDIT: Mapbox dependency removed. Uses fixed coordinates for demo distance.
   async function calculateFare(from, to) {
-    // Simulating geocoded coordinates for distance calculation
-    const fromCoords = { lat: 30.590, lon: 32.265 } // Ismailia Center
-    const toCoords = { lat: 30.580, lon: 32.255 }  // Nearby location
-    
+    const fromCoords = { lat: 30.590, lon: 32.265 }
+    const toCoords = { lat: 30.580, lon: 32.255 }
     const km = distanceKm(fromCoords.lat, fromCoords.lon, toCoords.lat, toCoords.lon)
     const fare = Math.round(km * 5)
-    
     return { km: km.toFixed(2), fare }
   }
 
@@ -41,12 +39,12 @@ export default function ClientDashboard({ user, onLogout }) {
       setRides(getRides())
       setForm({ from: '', to: '', notes: '' })
       setMsg(`Ride posted. Distance ~${km} km, Fare = ${fare} EGP`)
-      setTimeout(()=>setMsg(''), 4000)
+      setTimeout(() => setMsg(''), 4000)
     })
   }
 
-  function onAccept(rideId,bidId){
-    acceptBid({rideId,bidId})
+  function onAccept(rideId, bidId) {
+    acceptBid({ rideId, bidId })
     setRides(getRides())
   }
 
@@ -64,9 +62,26 @@ export default function ClientDashboard({ user, onLogout }) {
         <section className="panel">
           <h3>Request a ride</h3>
           <form onSubmit={submit} className="inline-form">
-            <input name="from" placeholder="From (address)" value={form.from} onChange={handleChange} required />
-            <input name="to" placeholder="To (address)" value={form.to} onChange={handleChange} required />
-            <input name="notes" placeholder="Notes" value={form.notes} onChange={handleChange}/>
+            <input 
+              name="from" 
+              placeholder="From (address)" 
+              value={form.from} 
+              onChange={handleChange} 
+              required 
+            />
+            <input 
+              name="to" 
+              placeholder="To (address)" 
+              value={form.to} 
+              onChange={handleChange} 
+              required 
+            />
+            <input 
+              name="notes" 
+              placeholder="Notes" 
+              value={form.notes} 
+              onChange={handleChange} 
+            />
             <button className="btn" type="submit">Post</button>
           </form>
           {msg && <div className="success">{msg}</div>}
@@ -75,15 +90,25 @@ export default function ClientDashboard({ user, onLogout }) {
         <section className="panel">
           <h3>Your active rides</h3>
           <div className="list">
-            {rides.filter(r=>r.clientId===user.id).map(r=>(
-              <RideCard key={r.id} ride={r} onAccept={onAccept} isClient={true} />
+            {rides.filter(r => r.clientId === user.id).map(r => (
+              <RideCard 
+                key={r.id} 
+                ride={r} 
+                onAccept={onAccept} 
+                isClient={true} 
+              />
             ))}
           </div>
         </section>
 
         <section className="panel">
           <h3>Map preview</h3>
-          <MapPreview locations={rides.filter(r=>r.clientId===user.id).map(r=>({from:r.from,to:r.to}))} />
+          <MapPreview 
+            locations={rides.filter(r => r.clientId === user.id).map(r => ({
+              from: r.from,
+              to: r.to
+            }))} 
+          />
         </section>
       </main>
     </div>
