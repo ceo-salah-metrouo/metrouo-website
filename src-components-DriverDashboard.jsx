@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { getRides, addBid } from '../lib/storage'
-import RideCard from './RideCard'
+import { getRides, addBid } from './src-lib-storage.js'
+import RideCard from './src-components-RideCard.jsx'
 
 export default function DriverDashboard({ user, onLogout }) {
   const [rides, setRides] = useState(getRides())
@@ -33,7 +33,12 @@ export default function DriverDashboard({ user, onLogout }) {
           <h3>Open Rides</h3>
           <div className="list">
             {rides.filter(r => r.status === 'open').map(r => (
-              <RideCard key={r.id} ride={r} onBid={placeBid} isClient={false} />
+              <RideCard 
+                key={r.id} 
+                ride={r} 
+                onBid={placeBid} 
+                isClient={false} 
+              />
             ))}
           </div>
         </section>
